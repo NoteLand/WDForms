@@ -11,9 +11,9 @@ public class CodecUpdater implements ProtocolCodecUpdater {
     @Override
     public BedrockCodec.Builder updateCodec(BedrockCodec.Builder builder, BedrockCodec baseCodec) {
         BedrockPacketDefinition<ModalFormRequestPacket> requestDefinition = baseCodec.getPacketDefinition(ModalFormRequestPacket.class);
-        builder.registerPacket(ModalFormRequestPacket::new, requestDefinition.getSerializer(), requestDefinition.getId());
+        builder.registerPacket(ModalFormRequestPacket::new, requestDefinition.getSerializer(), requestDefinition.getId(), requestDefinition.getRecipient());
         BedrockPacketDefinition<ModalFormResponsePacket> responseDefinition = baseCodec.getPacketDefinition(ModalFormResponsePacket.class);
-        builder.registerPacket(ModalFormResponsePacket::new, responseDefinition.getSerializer(), responseDefinition.getId());
+        builder.registerPacket(ModalFormResponsePacket::new, responseDefinition.getSerializer(), responseDefinition.getId(), responseDefinition.getRecipient());
         return builder;
     }
 
