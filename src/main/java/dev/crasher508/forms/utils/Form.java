@@ -38,9 +38,7 @@ public abstract class Form {
         this.data.addProperty("title", title);
     }
 
-    public boolean handle(ProxiedPlayer proxiedPlayer, String response) {
-        return false;
-    }
+    public abstract void handle(ProxiedPlayer proxiedPlayer, String response);
 
     public JsonObject getData() {
         return data;

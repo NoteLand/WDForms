@@ -43,10 +43,9 @@ public class ModalForm extends Form {
     }
 
     @Override
-    public boolean handle(ProxiedPlayer proxiedPlayer, String response) {
+    public void handle(ProxiedPlayer proxiedPlayer, String response) {
         if (response == null)
-            return true;
+            return;
         this.callback.onRun(proxiedPlayer, response.trim().equals("true"));
-        return true;
     }
 }

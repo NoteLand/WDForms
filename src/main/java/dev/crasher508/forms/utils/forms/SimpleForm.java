@@ -2,6 +2,7 @@ package dev.crasher508.forms.utils.forms;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import dev.crasher508.forms.Forms;
 import dev.crasher508.forms.utils.Form;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 
@@ -46,15 +47,14 @@ public class SimpleForm extends Form {
     }
 
     @Override
-    public boolean handle(ProxiedPlayer proxiedPlayer, String response) {
+    public void handle(ProxiedPlayer proxiedPlayer, String response) {
         if (response == null)
-            return true;
+            return;
         try {
             int button = Integer.parseInt(response.trim());
             this.callback.onRun(proxiedPlayer, button);
-            return true;
         } catch (NumberFormatException exception) {
-            return false;
+            Forms.getInstance().getLogger().error(exception.getMessage());
         }
     }
 }

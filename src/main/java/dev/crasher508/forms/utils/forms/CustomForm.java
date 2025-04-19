@@ -3,6 +3,7 @@ package dev.crasher508.forms.utils.forms;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dev.crasher508.forms.Forms;
 import dev.crasher508.forms.utils.Form;
 import dev.waterdog.waterdogpe.player.ProxiedPlayer;
 
@@ -83,16 +84,15 @@ public class CustomForm extends Form {
     }
 
     @Override
-    public boolean handle(ProxiedPlayer proxiedPlayer, String response) {
+    public void handle(ProxiedPlayer proxiedPlayer, String response) {
         if (response == null)
-            return true;
+            return;
         try {
             JsonArray formData = JsonParser.parseString(response).getAsJsonArray();
             this.callback.onRun(proxiedPlayer, formData);
-        } catch (IllegalStateException exception) {
-            return true;
+        } catch (IllegalStateException|IndexOutOfBoundsException exception) {
+            Forms.getInstance().getLogger().error(exception.getMessage());
         }
-        return true;
     }
 
     private void addContent(JsonObject element) {
